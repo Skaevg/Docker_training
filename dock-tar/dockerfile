@@ -1,0 +1,5 @@
+FROM debian 
+RUN mkdir -p /opt/libeatmydata
+# ADD my.tar.gz /opt/libeatmydata/ добавление архива и распаковка.
+ADD https://www.flamingspork.com/projects/libeatmydata/libeatmydata-105.tar.gz /opt/libeatmydata
+RUN ls -lRt /opt/libeatmydata
