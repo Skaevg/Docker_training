@@ -1,0 +1,18 @@
+#!/bin/bash
+IMAGE_NAME=$1
+IMAGE_NAME=$2
+if [[ $IMAGE_NAME = '' ]]
+then
+    echo "Usage: $0 IMAGE_NAME [ TAG ]"
+    exit 1
+fi
+if [[ $IMAGE_TAG = '' ]]
+then   
+    IMAGE_TAG=latest
+fi
+x=1
+for id in $(docker history -q "${IMAGE_NAME}:${IMAGE_TAG}" | grep -vw missing | tac)
+do
+    docker tag "${id}" "${IMAGE_NAME}:${IMAGE_TAG}_step_$x"
+    ((x++))
+done
